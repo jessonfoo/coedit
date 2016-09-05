@@ -1,6 +1,14 @@
 # coedit
 
-version 1.0.8.
+
+## Resources/components
+
+* Firebase 
+* Angular
+* Ace Editor
+* Express
+* Firepad
+* Grunt
 
 ## Build & development
 
