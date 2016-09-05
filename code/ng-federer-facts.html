@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <title>Rendering in an iframe</title>
+    <link href="/build/css/firedeck.css" rel="stylesheet" />
+  </head>
+  <body class="page ng-federer-facts">
+
+    <script src="/build/js/ngHack.js"></script>
+    <script>
+      (function() {
+
+          window.ngHack({
+            fbUrl: 'https://coedit-4b1b9.firebaseio.com/code/ng-federer-facts/post',
+            moduleName: 'Federer',
+            templateUrl: '/code/views/ng-federer-facts.html'
+          });
+
+      }());
+    </script>
+  </body>
+</html>
