@@ -1,6 +1,17 @@
-<div id="ctrl" ng-controller="editor">
   <h2>Editor</h2>
-  <br /> <br />
 
-  <div>{{secret}}</div>
-</div>
+  <style>
+    html { height: 100%; }
+    body { margin: 0; height: 100%; position: relative; }
+    /* Height / width / positioning can be customized for your use case.
+       For demo purposes, we make firepad fill the entire browser. */
+    #firepad-iframe{
+    	width:100%;
+    }
+  </style>
+  <!-- <div id="firepad-container"></div> -->
+ 	<iframe id="firepad-iframe" src="firepad/ace.html"></iframe> 
+  <script>
+
+  </script>
+

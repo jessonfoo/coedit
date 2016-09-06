@@ -13,6 +13,18 @@
   <!-- endbuild -->
   <!-- build:css(.tmp) styles/main.css -->
   <link rel="stylesheet" href="styles/main.css">
+  <!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
+
+<!-- Firepad -->
+<link rel="stylesheet" href="https://cdn.firebase.com/libs/firepad/1.4.0/firepad.css" />
+<script src="https://cdn.firebase.com/libs/firepad/1.4.0/firepad.min.js"></script>
+  <script src="scripts/ace/ace.js"></script>
+  <script src="scripts/ace/mode-javascript.js"></script>
+  <script src="scripts/ace/theme-textmate.js"></script>
+  <script src="scripts/firepad/firepad.js"></script>
+  <link rel="stylesheet" href="scripts/firepad/firepad.css" />
+  <script src="scripts/helpers/helper.js"></script>
   <!-- endbuild -->
 </head>
 <body ng-app="coeditApp">
@@ -46,7 +58,7 @@
 
             <li class=""><a href="#/account" ng-show-auth="">Account</a></li>
             <li class=""><a href="#/login" ng-hide-auth="">Login</a></li>
-            <li class=""><a href="#/editor" ng-hide-auth="">Editor</a></li>
+            <li class=""><a href="#/editor" ng-showe-auth="">Editor</a></li>
             <li class=""><a href="" ng-show-auth="" ng-click="logout()">Logout</a></li>
 
           </ul>
@@ -91,7 +103,8 @@
     };
 
     firebase.initializeApp(config);
-    var rootRef = firebase.database().ref();
+    const rootRef = firebase.database().ref();
+
   </script>
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
@@ -102,9 +115,40 @@
         <script src="scripts/angularfire/auth.js"></script>
         <script src="scripts/controllers/login.js"></script>
         <script src="scripts/controllers/account.js"></script>
+        <script src="scripts/controllers/editor.js"></script>
         <script src="scripts/directives/ngShowAuth.js"></script>
         <script src="scripts/directives/ngHideAuth.js"></script>
         <script src="scripts/routes.js"></script>
         <!-- endbuild -->
+        <script>
+            var fc = document.querySelectorAll('#firepad-container');
+            if(fc.length >=1){
+                var ref = 'https://coedit-4b1b9.firebaseio.com';
+    window.onload = function() {
+      //// Initialize Firebase.
+      // var firepadRef = getExampleRef();
+      // TODO: Replace above line with:
+
+  
+      //// Create ACE
+      var editor = ace.edit("firepad-container");
+      editor.setTheme("ace/theme/textmate");
+      var session = editor.getSession();
+      session.setUseWrapMode(true);
+      session.setUseWorker(false);
+      session.setMode("ace/mode/javascript");
+  
+      //// Create Firepad.
+      var firepad = Firepad.fromACE(firepadRef, editor);
+      
+      //// Initialize contents.
+      firepad.on('ready', function() {
+        if (firepad.isHistoryEmpty()) {
+          firepad.setText('// JavaScript Editing with Firepad!\nfunction go() {\n  var message = "Hello, world.";\n  console.log(message);\n}');
+        }
+      });
+    }
+    };
+        </script>
 </body>
 </html>

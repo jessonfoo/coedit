@@ -103,7 +103,7 @@ angular.module('coeditApp')
       })
       .when('/editor', {
         templateUrl: 'views/editor.html',
-        controller: 'editor',
+        controller: 'EditorCtrl',
         resolve: {
           "currentAuth": ["auth", function (auth) {
             return auth.$waitForSignIn();
