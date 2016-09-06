@@ -9,7 +9,7 @@
   <!-- Include ACE and its JavaScript mode and theme files -->
   <script src="ace/ace.js"></script>
   <script src="ace/mode-javascript.js"></script>
-  <script src="ace/theme-textmate.js"></script>
+  <script src="ace/theme-monokai.js"></script>
 
   <!-- Include Firepad -->
   <script src="firepad.js"></script>
@@ -42,7 +42,7 @@
   
       //// Create ACE
       var editor = ace.edit("firepad-container");
-      editor.setTheme("ace/theme/textmate");
+      editor.setTheme("ace/theme/monokai");
       var session = editor.getSession();
       session.setUseWrapMode(true);
       session.setUseWorker(false);

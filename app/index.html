@@ -120,35 +120,5 @@
         <script src="scripts/directives/ngHideAuth.js"></script>
         <script src="scripts/routes.js"></script>
         <!-- endbuild -->
-        <script>
-            var fc = document.querySelectorAll('#firepad-container');
-            if(fc.length >=1){
-                var ref = 'https://coedit-4b1b9.firebaseio.com';
-    window.onload = function() {
-      //// Initialize Firebase.
-      // var firepadRef = getExampleRef();
-      // TODO: Replace above line with:
-
-  
-      //// Create ACE
-      var editor = ace.edit("firepad-container");
-      editor.setTheme("ace/theme/textmate");
-      var session = editor.getSession();
-      session.setUseWrapMode(true);
-      session.setUseWorker(false);
-      session.setMode("ace/mode/javascript");
-  
-      //// Create Firepad.
-      var firepad = Firepad.fromACE(firepadRef, editor);
-      
-      //// Initialize contents.
-      firepad.on('ready', function() {
-        if (firepad.isHistoryEmpty()) {
-          firepad.setText('// JavaScript Editing with Firepad!\nfunction go() {\n  var message = "Hello, world.";\n  console.log(message);\n}');
-        }
-      });
-    }
-    };
-        </script>
 </body>
 </html>
