@@ -1,33 +1,14 @@
-// Generated on 2016-09-04 using generator-angularfire-express 1.0.8
 'use strict';
-
-// # Globbing
-// for performance reasons we're only matching one level down:
-// 'test/spec/{,*/}*.js'
-// use this if you want to recursively match all subfolders:
-// 'test/spec/**/*.js'
-
 module.exports = function (grunt) {
-
-  // Load grunt tasks automatically
   require('load-grunt-tasks')(grunt);
-
-  // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
-
-  // Configurable paths for the application
   var appConfig = {
     app: require('./bower.json').appPath || 'app',
     dist: 'dist'
   };
-
-  // Define the configuration for all the tasks
+  grunt.loadNpmTasks('grunt-newer');
   grunt.initConfig({
-
-    // Project settings
-    yeoman: appConfig,
-
-    // Watches files for changes and runs tasks based on the changed files
+    coEdit: appConfig,
     watch: {
       express: {
         files:  [ 'server/**/*.js' ],
@@ -37,24 +18,27 @@ module.exports = function (grunt) {
             spawn: false
         }
       },
-      
+
       bower: {
         files: ['bower.json'],
         tasks: ['wiredep']
       },
+
       js: {
-        files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
+        files: ['<= coEdit.app %>/scripts/{,*/}*.js'],
         tasks: ['newer:jshint:all'],
         options: {
           livereload: 35729
         }
       },
+
       jsTest: {
         files: ['test/spec/{,*/}*.js'],
         tasks: ['newer:jshint:test', 'karma']
       },
+
       styles: {
-        files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
+        files: ['<%= coEdit.app %>/styles/{,*/}*.css'],
         tasks: ['newer:copy:styles', 'autoprefixer']
       },
       gruntfile: {
@@ -65,13 +49,12 @@ module.exports = function (grunt) {
           livereload: 35729
         },
         files: [
-          '<%= yeoman.app %>/{,*/}*.html',
-          '.tmp/styles/{,*/}*.css',
-          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+          '<%= coEdit.app %>/{,*/}*.html',
+          '.tmp/styles/{,*/}*.css'
         ]
       }
     },
-    
+
     express: {
       options: {
         script: 'server/app.js',
@@ -84,9 +67,8 @@ module.exports = function (grunt) {
         path: 'http://localhost:3000/'
       }
     },
-    
 
-    // Make sure code styles are up to par and there are no obvious mistakes
+
     jshint: {
       options: {
         jshintrc: '.jshintrc',
@@ -95,7 +77,7 @@ module.exports = function (grunt) {
       all: {
         src: [
           'Gruntfile.js',
-          '<%= yeoman.app %>/scripts/{,*/}*.js'
+          '<%= coEdit.app %>/scripts/{,*/}*.js'
         ]
       },
       test: {
@@ -106,22 +88,20 @@ module.exports = function (grunt) {
       }
     },
 
-    // Empties folders to start fresh
     clean: {
       dist: {
         files: [{
           dot: true,
           src: [
             '.tmp',
-            '<%= yeoman.dist %>/public/{,*/}*',
-            '!<%= yeoman.dist %>/public/.git{,*/}*'
+            '<%= coEdit.dist %>/public/{,*/}*',
+            '!<%= coEdit.dist %>/public/.git{,*/}*'
           ]
         }]
       },
       server: '.tmp'
     },
 
-    // Add vendor prefixed styles
     autoprefixer: {
       options: {
         browsers: ['last 1 version']
@@ -147,10 +127,9 @@ module.exports = function (grunt) {
       }
     },
 
-    // Automatically inject Bower components into the app
     wiredep: {
       app: {
-        src: ['<%= yeoman.app %>/index.html'],
+        src: ['<%= coEdit.app %>/index.html'],
         ignorePath:  /\.\.\//
       },
       test: {
@@ -171,25 +150,20 @@ module.exports = function (grunt) {
       }
     },
 
-    // Renames files for browser caching purposes
     filerev: {
       dist: {
         src: [
-          '<%= yeoman.dist %>/public/scripts/{,*/}*.js',
-          '<%= yeoman.dist %>/public/styles/{,*/}*.css',
-          '<%= yeoman.dist %>/public/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-          '<%= yeoman.dist %>/public/styles/fonts/*'
+          '<%= coEdit.dist %>/public/scripts/{,*/}*.js',
+          '<%= coEdit.dist %>/public/styles/{,*/}*.css',
+          '<%= coEdit.dist %>/public/styles/fonts/*'
         ]
       }
     },
 
-    // Reads HTML for usemin blocks to enable smart builds that automatically
-    // concat, minify and revision files. Creates configurations in memory so
-    // additional tasks can operate on them
     useminPrepare: {
-      html: '<%= yeoman.app %>/index.html',
+      html: '<%= coEdit.app %>/index.html',
       options: {
-        dest: '<%= yeoman.dist %>/public',
+        dest: '<%= coEdit.dist %>/public',
         flow: {
           html: {
             steps: {
@@ -202,52 +176,25 @@ module.exports = function (grunt) {
       }
     },
 
-    // Performs rewrites based on filerev and the useminPrepare configuration
     usemin: {
-      html: ['<%= yeoman.dist %>/public/{,*/}*.html'],
-      css: ['<%= yeoman.dist %>/public/styles/{,*/}*.css'],
+      html: ['<%= coEdit.dist %>/public/{,*/}*.html'],
+      css: ['<%= coEdit.dist %>/public/styles/{,*/}*.css'],
       options: {
         assetsDirs: [
-          '<%= yeoman.dist %>/public',
-          '<%= yeoman.dist %>/public/images',
-          '<%= yeoman.dist %>/public/styles'
+          '<%= coEdit.dist %>/public',
+          '<%= coEdit.dist %>/public/images',
+          '<%= coEdit.dist %>/public/styles'
         ]
       }
     },
-
-    // The following *-min tasks will produce minified files in the dist folder
-    // By default, your `index.html`'s <!-- Usemin block --> will take care of
-    // minification. These next options are pre-configured if you do not wish
-    // to use the Usemin blocks.
-    // cssmin: {
-    //   dist: {
-    //     files: {
-    //       '<%= yeoman.dist %>/public/styles/main.css': [
-    //         '.tmp/styles/{,*/}*.css'
-    //       ]
-    //     }
-    //   }
-    // },
-    // uglify: {
-    //   dist: {
-    //     files: {
-    //       '<%= yeoman.dist %>/public/scripts/scripts.js': [
-    //         '<%= yeoman.dist %>/public/public/scripts/scripts.js'
-    //       ]
-    //     }
-    //   }
-    // },
-    // concat: {
-    //   dist: {}
-    // },
 
     imagemin: {
       dist: {
         files: [{
           expand: true,
-          cwd: '<%= yeoman.app %>/images',
+          cwd: '<%= coEdit.app %>/images',
           src: '{,*/}*.{png,jpg,jpeg,gif}',
-          dest: '<%= yeoman.dist %>/public/images'
+          dest: '<%= coEdit.dist %>/public/images'
         }]
       }
     },
@@ -256,9 +203,9 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '<%= yeoman.app %>/images',
+          cwd: '<%= coEdit.app %>/images',
           src: '{,*/}*.svg',
-          dest: '<%= yeoman.dist %>/public/images'
+          dest: '<%= coEdit.dist %>/public/images'
         }]
       }
     },
@@ -274,9 +221,9 @@ module.exports = function (grunt) {
         },
         files: [{
           expand: true,
-          cwd: '<%= yeoman.dist %>/public',
+          cwd: '<%= coEdit.dist %>/public',
           src: ['*.html', 'views/{,*/}*.html'],
-          dest: '<%= yeoman.dist %>/public'
+          dest: '<%= coEdit.dist %>/public'
         }]
       }
     },
@@ -297,7 +244,7 @@ module.exports = function (grunt) {
     // Replace Google CDN references
     cdnify: {
       dist: {
-        html: ['<%= yeoman.dist %>/public/*.html']
+        html: ['<%= coEdit.dist %>/public/*.html']
       }
     },
 
@@ -312,8 +259,8 @@ module.exports = function (grunt) {
         }, {
           expand: true,
           dot: true,
-          cwd: '<%= yeoman.app %>',
-          dest: '<%= yeoman.dist %>/public',
+          cwd: '<%= coEdit.app %>',
+          dest: '<%= coEdit.dist %>/public',
           src: [
             '*.{ico,png,txt}',
             '.htaccess',
@@ -325,18 +272,18 @@ module.exports = function (grunt) {
         }, {
           expand: true,
           cwd: '.tmp/images',
-          dest: '<%= yeoman.dist %>/public/images',
+          dest: '<%= coEdit.dist %>/public/images',
           src: ['generated/*']
         }, {
           expand: true,
           cwd: 'bower_components/bootstrap/dist',
           src: 'fonts/*',
-          dest: '<%= yeoman.dist %>/public'
+          dest: '<%= coEdit.dist %>/public'
         }]
       },
       styles: {
         expand: true,
-        cwd: '<%= yeoman.app %>/styles',
+        cwd: '<%= coEdit.app %>/styles',
         dest: '.tmp/styles/',
         src: '{,*/}*.css'
       }
@@ -367,6 +314,21 @@ module.exports = function (grunt) {
   });
 
 
+  grunt.registerTask('dev', 'start dev server', function (target) {
+    if (target === 'dist') {
+      return grunt.task.run('express:development');
+    }
+
+    grunt.task.run([
+      'clean:server',
+      'wiredep',
+      'concurrent:server',
+      'autoprefixer:server',
+      'express',
+      'open',
+      'watch'
+    ]);
+  });
   grunt.registerTask('serve', 'Compile then start a connect/express web server', function (target) {
     if (target === 'dist') {
       return grunt.task.run(['build', 'express:prod']);
@@ -413,10 +375,12 @@ module.exports = function (grunt) {
     'usemin',
     'htmlmin'
   ]);
+  grunt.registerTask('test', [
+    // 'newer:jshint',
+    'test',
+  ]);
 
   grunt.registerTask('default', [
-    'newer:jshint',
-    'test',
-    'build'
+    'serve'
   ]);
 };
