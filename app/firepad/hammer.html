@@ -108,7 +108,7 @@
     hammerBtn.onclick = function(e) { hammer(); stopEvent(e); };
 
     function randString(length, includeNewlines) {
-      var str = ""
+      var str = "";
       for(var i = 0; i < length; i++) {
         if (includeNewlines && Math.random()*10 < 1)
           str += '\n';

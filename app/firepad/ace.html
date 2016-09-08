@@ -17,7 +17,6 @@
 
   <!-- Helper for generating URLs / Firebase references for example purposes.
        Not necessary in production apps. -->
-  <script src="example-helper.js"></script>
 
   <style>
     html { height: 100%; }
@@ -25,7 +24,9 @@
     /* Height / width / positioning can be customized for your use case.
        For demo purposes, we make firepad fill the entire browser. */
     #firepad-container {
-      position: absolute; left: 0; top: 0; bottom: 0; right: 0; max-width:1400px;
+      position: absolute; left: 0; top: 0; bottom: 0; right: 0; max-width:100vw;
+        width:100vw;
+        height:100vh !important;
     }
   </style>
 </head>
@@ -36,21 +37,19 @@
   <script>
     window.onload = function() {
       //// Initialize Firebase.
-      var firepadRef = getExampleRef();
-      // TODO: Replace above line with:
-      // var ref = new Firebase('<YOUR FIREBASE URL>');
-  
+      var firepadRef = getRef();
+
       //// Create ACE
       var editor = ace.edit("firepad-container");
       editor.setTheme("ace/theme/monokai");
       var session = editor.getSession();
       session.setUseWrapMode(true);
-      session.setUseWorker(false);
+      session.setUseWorker(true);
       session.setMode("ace/mode/javascript");
-  
+
       //// Create Firepad.
       var firepad = Firepad.fromACE(firepadRef, editor);
-      
+
       //// Initialize contents.
       firepad.on('ready', function() {
         if (firepad.isHistoryEmpty()) {

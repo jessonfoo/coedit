@@ -1701,7 +1701,7 @@ firepad.RichTextToolbar = (function(global) {
     var btn = utils.elt('a', [utils.elt('span', '', { 'class': 'firepad-tb-' + iconName } )], { 'class': 'firepad-btn' });
     utils.on(btn, 'click', utils.stopEventAnd(function() { self.trigger(eventName); }));
     return btn;
-  }
+  };
 
   RichTextToolbar.prototype.makeElement_ = function() {
     var self = this;
@@ -4093,7 +4093,7 @@ firepad.RichTextCodeMirrorAdapter = (function () {
 
   RichTextCodeMirrorAdapter.prototype.onCursorActivity = function () {
     this.trigger('cursorActivity');
-  }
+  };
 
   RichTextCodeMirrorAdapter.prototype.onFocus = function () {
     this.trigger('focus');

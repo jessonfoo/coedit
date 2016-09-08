@@ -5,26 +5,18 @@
   <title></title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width">
-  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-  <!-- build:css(.) styles/vendor.css -->
-  <!-- bower:css -->
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-  <!-- endbower -->
-  <!-- endbuild -->
-  <!-- build:css(.tmp) styles/main.css -->
   <link rel="stylesheet" href="styles/main.css">
-<script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
+  <script src="https://cdn.firebase.com/js/client/1.0.11/firebase.js"></script>
 
-<!-- Firepad -->
-<link rel="stylesheet" href="https://cdn.firebase.com/libs/firepad/1.4.0/firepad.css" />
-<script src="https://cdn.firebase.com/libs/firepad/1.4.0/firepad.min.js"></script>
   <script src="scripts/ace/ace.js"></script>
   <script src="scripts/ace/mode-javascript.js"></script>
-  <script src="scripts/ace/theme-textmate.js"></script>
+  <script src="scripts/ace/theme-monokai.js"></script>
   <script src="scripts/firepad/firepad.js"></script>
   <link rel="stylesheet" href="scripts/firepad/firepad.css" />
   <script src="scripts/helpers/helper.js"></script>
-  <!-- endbuild -->
+  <script src="scripts/helpers/userlist.js"></script>
+  <link rel="stylesheet" href="styles/userlist.css" />
 </head>
 <body ng-app="coeditApp">
 <!--[if lt IE 7]>
@@ -57,7 +49,7 @@
 
             <li class=""><a href="#/account" ng-show-auth="">Account</a></li>
             <li class=""><a href="#/login" ng-hide-auth="">Login</a></li>
-            <li class=""><a href="#/editor" ng-showe-auth="">Editor</a></li>
+            <li class=""><a href="#/editor" ng-show-auth="">Editor</a></li>
             <li class=""><a href="" ng-show-auth="" ng-click="logout()">Logout</a></li>
 
           </ul>
@@ -66,12 +58,13 @@
     </div>
   </div>
 
-  <div class="container" style="max-width:1400px;width:1400px !important;margin-left:auto;margin-right:auto;">
+  <div class="container main-view-container">
 
     <div ng-view=""></div>
 
   </div>
 
+      <div id="firepad-container"></div>
 
 
 
@@ -92,7 +85,6 @@
   <script src="bower_components/angular-touch/angular-touch.js"></script>
   <!-- endbower -->
   <!-- endbuild -->
-
   <script>
     var config = {
       apiKey: 'AIzaSyAZg8ryRWpscxKdu0r9sdkzc53QeSAe4C0',
@@ -102,9 +94,41 @@
     };
 
     firebase.initializeApp(config);
-    const rootRef = firebase.database().ref();
+    var database= firebase.database();
+    const rootRef = database.ref();
 
   </script>
+
+<script>
+
+    var ref =rootRef;
+  var firepadRef = getRef();
+
+  var editor = ace.edit("firepad-container");
+  editor.setTheme("scripts/ace/theme/monokai");
+  var session = editor.getSession();
+  session.setUseWrapMode(true);
+  session.setUseWorker(true);
+  session.setMode("scripts/ace/mode/javascript");
+  //// Create CodeMirror (with lineWrapping on).
+
+  // Create a random ID to use as our user ID (we must give this to firepad and FirepadUserList).
+  var userId = Math.floor(Math.random() * 9999999999).toString();
+
+  //// Create Firepad (with rich text features and our desired userId).
+  var firepad = Firepad.fromACE(firepadRef, editor, { userId: userId});
+
+  //// Create FirepadUserList (with our desired userId).
+  var firepadUserList = FirepadUserList.fromDiv(firepadRef.child('users'),
+                                                document.getElementById('userlist'), userId);
+
+  //// Initialize contents.
+  firepad.on('ready', function() {
+    if (firepad.isHistoryEmpty()) {
+      firepad.setText('// JavaScript Editing with Firepad!\nfunction go() {\n  var message = "Hello, world.";\n  console.log(message);\n}');
+    }
+  });
+</script>
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
@@ -116,8 +140,10 @@
         <script src="scripts/controllers/account.js"></script>
         <script src="scripts/controllers/editor.js"></script>
         <script src="scripts/directives/ngShowAuth.js"></script>
+        <script src="scripts/directives/ngFirePad.js"></script>
         <script src="scripts/directives/ngHideAuth.js"></script>
         <script src="scripts/routes.js"></script>
         <!-- endbuild -->
 </body>
 </html>
+

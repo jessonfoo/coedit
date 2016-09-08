@@ -1,10 +1,9 @@
-#!/usr/bin/env node
+'use strict';
 var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
 var app = express();
 var routes = require('./routes/index');
-
 // Set static files
 app.use(express.static('app'));
 app.use(express.static('.tmp'));
@@ -17,6 +16,7 @@ app.use('/', routes);
 
 app.set('port', process.env.PORT || 3000);
 
-var server = app.listen(app.get('port'), function() {
-  console.log('Express server listening at http://localhost:' + server.address().port);
-});
+var server = app.listen(app.get('port'),
+   function() {
+    console.log('Express server listening at http://localhost:' + server.address().port);
+  });

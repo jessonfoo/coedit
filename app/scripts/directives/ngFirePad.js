@@ -1,11 +1,10 @@
-(function (angular, ace, Firepad) {
 	"use strict";
 
   var app = angular.module('coeditApp');
 
-	app.directive('firePad', function ($timeout, Code, $q) {
+	app.directive('ngFirePad', function ($timeout, Code, $q) {
 		return {
-			restrict: 'E',
+			restrict: 'AE',
 			scope: {
 				location: '@',
 				auth: '=',
@@ -136,5 +135,3 @@
 			}
 		};
 	});
-
-}(window.angular, window.ace, window.Firepad));

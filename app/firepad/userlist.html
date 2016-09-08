@@ -7,10 +7,9 @@
   <!-- Include Firebase -->
   <script src="https://cdn.firebase.com/js/client/1.0.11/firebase.js"></script>
 
-  <!-- Include CodeMirror -->
-  <script src="codemirror/lib/codemirror.js"></script>
-  <link rel="stylesheet" href="codemirror/lib/codemirror.css" />
-
+  <script src="ace/ace.js"></script>
+  <script src="ace/mode-javascript.js"></script>
+  <script src="ace/theme-monokai.js"></script>
   <!-- Include Firepad -->
   <script src="firepad.js"></script>
   <link rel="stylesheet" href="firepad.css" />
@@ -35,28 +34,38 @@
     .firepad {
       position: absolute; left: 175px; top: 0; bottom: 0; right: 0; height: auto;
     }
+
+    html { height: 100%; }
+    body { margin: 0; height: 100%; position: relative; }
+    /* Height / width / positioning can be customized for your use case.
+       For demo purposes, we make firepad fill the entire browser. */
+    #firepad-container {
+      position: absolute; left: 0; top: 0; bottom: 0; right: 0;
+    }
   </style>
 </head>
 
 <body>
   <div id="userlist"></div>
-  <div id="firepad"></div>
+  <div id="firepad-container"></div>
 
   <script>
     //// Initialize Firebase.
-    var firepadRef = getExampleRef();
-    // TODO: Replace above line with:
-    // var firepadRef = new Firebase('<YOUR FIREBASE URL>');
+    var firepadRef = getRef();
 
+      var editor = ace.edit("firepad-container");
+      editor.setTheme("ace/theme/monokai");
+      var session = editor.getSession();
+      session.setUseWrapMode(true);
+      session.setUseWorker(true);
+      session.setMode("ace/mode/javascript");
     //// Create CodeMirror (with lineWrapping on).
-    var codeMirror = CodeMirror(document.getElementById('firepad'), { lineWrapping: true });
 
     // Create a random ID to use as our user ID (we must give this to firepad and FirepadUserList).
     var userId = Math.floor(Math.random() * 9999999999).toString();
 
     //// Create Firepad (with rich text features and our desired userId).
-    var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror,
-        { richTextToolbar: true, richTextShortcuts: true, userId: userId});
+    var firepad = Firepad.fromACE(firepadRef, editor, { userId: userId});
 
     //// Create FirepadUserList (with our desired userId).
     var firepadUserList = FirepadUserList.fromDiv(firepadRef.child('users'),
@@ -65,7 +74,7 @@
     //// Initialize contents.
     firepad.on('ready', function() {
       if (firepad.isHistoryEmpty()) {
-        firepad.setText('Check out the user list to the left!');
+        firepad.setText('// JavaScript Editing with Firepad!\nfunction go() {\n  var message = "Hello, world.";\n  console.log(message);\n}');
       }
     });
   </script>

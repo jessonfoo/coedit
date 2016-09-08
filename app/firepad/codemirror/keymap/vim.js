@@ -2615,7 +2615,7 @@
               if (wordStart == cur.ch && lineNum == cur.line &&
                   wordEnd == wordStart + dir) {
                 // We started at the end of a word. Find the next one.
-                continue;
+
               } else {
                 return {
                   from: Math.min(wordStart, wordEnd + 1),
@@ -4007,7 +4007,7 @@
             exitInsertMode(cm);
           }
         }
-      };
+      }
       macroModeState.isPlaying = false;
     }
 
@@ -4162,8 +4162,7 @@
         exitInsertMode(cm);
       }
       macroModeState.isPlaying = false;
-    };
-
+    }
     function repeatInsertModeChanges(cm, changes, repeat) {
       function keyHandler(binding) {
         if (typeof binding == 'string') {
