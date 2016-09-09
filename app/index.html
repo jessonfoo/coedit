@@ -7,14 +7,25 @@
   <meta name="viewport" content="width=device-width">
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
   <link rel="stylesheet" href="styles/main.css">
-<script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
 
-<link rel="stylesheet" href="https://cdn.firebase.com/libs/firepad/1.4.0/firepad.css" />
-<script src="https://cdn.firebase.com/libs/firepad/1.4.0/firepad.min.js"></script>
-  <script src="scripts/ace/ace.js"></script>
-  <script src="scripts/ace/mode-javascript.js"></script>
-  <script src="scripts/ace/theme-textmate.js"></script>
-  <script src="scripts/helpers/helper.js"></script>
+   <script src="https://cdn.firebase.com/js/client/1.0.11/firebase.js"></script>
+
+  <script src="firepad/ace/ace.js"></script>
+  <script src="firepad/ace/mode-javascript.js"></script>
+  <script src="firepad/ace/theme-monokai.js"></script>
+
+  <!-- Include Firepad -->
+  <script src="firepad/firepad.js"></script>
+  <link rel="stylesheet" href="firepad/firepad.css" />
+
+  <!-- Include example userlist. -->
+  <script src="firepad/firepad-userlist.js"></script>
+  <link rel="stylesheet" href="firepad/firepad-userlist.css" />
+
+  <!-- Helper for generating URLs / Firebase references for example purposes.
+       Not necessary in production apps. -->
+  <script src="firepad/example-helper.js"></script>
+ 
 </head>
 <body ng-app="coeditApp">
 <div class="header" ng-controller="MainCtrl" ng-cloak="">
