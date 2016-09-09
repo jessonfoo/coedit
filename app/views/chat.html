@@ -1,8 +1,12 @@
 <h2>Chat</h2>
 
-<div class="">
-  <p> Add new message: </p>
 
+<div class="container-fluid">
+  <div class="row-fluid">
+  <div class="col-xs-4">
+    <p ng-repeat="msg in messages"> {{ msg.text }}</p>
+  </div>
+  </div>
   <div class="row">
     <form class="">
       <div class="col-lg-4">
@@ -18,8 +22,3 @@
     </form>
   </div>
 </div>
-<p>Last messages: </p>
-
-<ul>
-  <li ng-repeat="msg in messages"> {{ msg.text }}</li>
-</ul>
