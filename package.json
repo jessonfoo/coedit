@@ -73,7 +73,7 @@
   "scripts": {
     "build": "grunt build",
     "serve": "grunt serve",
-    "postinstall": "grunt build && grunt serve",
+    "postinstall": "grunt serve",
     "start": "node ./server/app.js"
   }
 }
