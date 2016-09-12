@@ -11,7 +11,7 @@ module.exports = function (grunt) {
     coEdit: appConfig,
     watch: {
       express: {
-        files:  [ 'server/**/*.js' ],
+        files:  [ 'app/**/*.js' ],
           tasks:  [ 'express' ],
           options: {
           livereload: true,
@@ -57,7 +57,7 @@ module.exports = function (grunt) {
 
     express: {
       options: {
-        script: 'server/app.js',
+        script: 'app/app.js',
           port: 3000
       },
       defaults: {}
@@ -253,7 +253,7 @@ module.exports = function (grunt) {
       build: {
         files: [{
           expand: true,
-          cwd: './server/',
+          cwd: './app/',
           dest: '/server',
           src: '**/*.*'
         }, {
