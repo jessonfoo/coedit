@@ -74,7 +74,8 @@
   "scripts": {
     "build": "grunt build",
     "serve": "grunt serve",
-    "postinstall": "grunt",
-    "start": "node server/app.js"
+    "start": "node server/app.js",
+    "postinstall": "bower install && grunt default",
+    "heroku-postbuild": "bower install && grunt"
   }
 }
