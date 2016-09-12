@@ -1,1 +1,20 @@
-# ignore node modulesnode_modules/# ignore dist folder, require build for deploydist/# ignore bower componentsbower_components/# ignore these dot folders.tmp/.sass-cache/.idea/.sonar/#ignore these dot files.DS_Store.env
+# ignore node modules
+node_modules/
+
+# ignore dist folder, require build for deploy
+dist/
+build/
+
+# ignore bower components
+bower_components/
+
+# ignore these dot folders
+.tmp/
+.sass-cache/
+.idea/
+.sonar/
+
+#ignore these dot files
+.DS_Store
+.env
+

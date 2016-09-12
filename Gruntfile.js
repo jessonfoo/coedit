@@ -1,17 +1,20 @@
 'use strict';
 module.exports = function (grunt) {
+  var eDefaults = require('express-defaults');
   require('load-grunt-tasks')(grunt);
+  // require('dotenv-safe').load();
   require('time-grunt')(grunt);
   var appConfig = {
     app: require('./bower.json').appPath || 'app',
-    build: 'build'
+    build: 'build',
+    port: (process.env.PORT || 3000)
   };
   grunt.loadNpmTasks('grunt-newer');
   grunt.initConfig({
     coEdit: appConfig,
     watch: {
       express: {
-        files:  [ 'app/**/*.js' ],
+        files:  [ 'server/**/*.js' ],
           tasks:  [ 'express' ],
           options: {
           livereload: true,
@@ -57,14 +60,14 @@ module.exports = function (grunt) {
 
     express: {
       options: {
-        script: 'app/app.js',
-          port: 3000
-      },
-      defaults: {}
+        script: 'server/app.js',
+          port: '<%=coEdit.port%>'
+      }
     },
+
     open: {
       dev: {
-        path: 'http://localhost:3000/'
+        path: 'http://localhost:<%= coEdit.port %>/'
       }
     },
 
@@ -129,6 +132,7 @@ module.exports = function (grunt) {
 
     wiredep: {
       app: {
+        devDependencies: true,
         src: ['<%= coEdit.app %>/index.html'],
         ignorePath:  /\.\.\//
       },
@@ -253,8 +257,8 @@ module.exports = function (grunt) {
       build: {
         files: [{
           expand: true,
-          cwd: './app/',
-          dest: '/server',
+          cwd: './server/',
+          dest: './build/',
           src: '**/*.*'
         }, {
           expand: true,
@@ -381,6 +385,7 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('default', [
+    'build',
     'serve'
   ]);
 };
