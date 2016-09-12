@@ -11,34 +11,7 @@
     "express": "^4.14.0",
     "grunt": "0.4.5",
     "grunt-autoprefixer": "^2.0.0",
-    "grunt-cli": "1.2.0",
-    "grunt-concurrent": "^1.0.0",
-    "grunt-contrib": "*",
-    "grunt-contrib-clean": "^0.6.0",
-    "grunt-contrib-concat": "^0.5.0",
-    "grunt-contrib-connect": "^0.9.0",
-    "grunt-contrib-copy": "^0.7.0",
-    "grunt-contrib-cssmin": "^0.12.0",
-    "grunt-contrib-htmlmin": "^0.4.0",
-    "grunt-contrib-imagemin": "^0.9.2",
-    "grunt-contrib-jshint": "^0.11.0",
-    "grunt-contrib-uglify": "0.7.0",
-    "grunt-contrib-watch": "^0.6.1",
-    "grunt-express-server": "^0.5.3",
-    "grunt-filerev": "^2.1.2",
-    "grunt-google-cdn": "^0.4.3",
-    "grunt-newer": "^1.2.0",
-    "grunt-ng-annotate": "^0.9.2",
-    "grunt-open": "^0.2.3",
-    "grunt-svgmin": "^2.0.0",
-    "grunt-usemin": "^3.0.0",
-    "grunt-wiredep": "^2.0.0",
-    "jshint-stylish": "^1.0.0",
-    "less": "*",
-    "load-grunt-tasks": "^3.1.0",
-    "react": "^15.3.1",
-    "react-ace": "^3.5.0",
-    "time-grunt": "^1.0.0"
+    "grunt-cli": "1.2.0"
   },
   "repository": {},
   "devDependencies": {
@@ -72,12 +45,12 @@
     "time-grunt": "^1.0.0"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": "*"
   },
   "scripts": {
-    "build": "npm install --save",
+    "build": "grunt build",
     "serve": "grunt serve",
-    "postinstall":"grunt serve",
+    "postinstall":"grunt build && grunt serve",
     "start": "node ./server/app.js"
   }
 }
