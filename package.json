@@ -68,7 +68,7 @@
     "time-grunt": "^1.0.0"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": "5.11.1"
   },
   "scripts": {
     "build": "grunt build",
