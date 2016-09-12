@@ -8,7 +8,7 @@
     "react": "^15.3.1",
     "react-ace": "^3.5.0",
     "bower":"*",
-    "grunt": "*",
+    "grunt-cli": "*",
     "grunt-contrib": "*",
     "body-parser": "^1.15.2",
     "chalk": "^0.4.0",
@@ -77,6 +77,6 @@
   "scripts": {
     "build": "npm install --save",
     "serve": "grunt serve",
-    "start":"grunt serve"
+    "start":"node ./server/app.js"
   }
 }
