@@ -4,7 +4,7 @@ module.exports = function (grunt) {
   require('time-grunt')(grunt);
   var appConfig = {
     app: require('./bower.json').appPath || 'app',
-    dist: 'dist'
+    build: 'build'
   };
   grunt.loadNpmTasks('grunt-newer');
   grunt.initConfig({
@@ -89,13 +89,13 @@ module.exports = function (grunt) {
     },
 
     clean: {
-      dist: {
+      build: {
         files: [{
           dot: true,
           src: [
             '.tmp',
-            '<%= coEdit.dist %>/public/{,*/}*',
-            '!<%= coEdit.dist %>/public/.git{,*/}*'
+            '<%= coEdit.build %>/public/{,*/}*',
+            '!<%= coEdit.build %>/public/.git{,*/}*'
           ]
         }]
       },
@@ -117,7 +117,7 @@ module.exports = function (grunt) {
           dest: '.tmp/styles/'
         }]
       },
-      dist: {
+      build: {
         files: [{
           expand: true,
           cwd: '.tmp/styles/',
@@ -151,11 +151,11 @@ module.exports = function (grunt) {
     },
 
     filerev: {
-      dist: {
+      build: {
         src: [
-          '<%= coEdit.dist %>/public/scripts/{,*/}*.js',
-          '<%= coEdit.dist %>/public/styles/{,*/}*.css',
-          '<%= coEdit.dist %>/public/styles/fonts/*'
+          '<%= coEdit.build %>/public/scripts/{,*/}*.js',
+          '<%= coEdit.build %>/public/styles/{,*/}*.css',
+          '<%= coEdit.build %>/public/styles/fonts/*'
         ]
       }
     },
@@ -163,7 +163,7 @@ module.exports = function (grunt) {
     useminPrepare: {
       html: '<%= coEdit.app %>/index.html',
       options: {
-        dest: '<%= coEdit.dist %>/public',
+        dest: '<%= coEdit.build %>/public',
         flow: {
           html: {
             steps: {
@@ -177,41 +177,41 @@ module.exports = function (grunt) {
     },
 
     usemin: {
-      html: ['<%= coEdit.dist %>/public/{,*/}*.html'],
-      css: ['<%= coEdit.dist %>/public/styles/{,*/}*.css'],
+      html: ['<%= coEdit.build %>/public/{,*/}*.html'],
+      css: ['<%= coEdit.build %>/public/styles/{,*/}*.css'],
       options: {
         assetsDirs: [
-          '<%= coEdit.dist %>/public',
-          '<%= coEdit.dist %>/public/images',
-          '<%= coEdit.dist %>/public/styles'
+          '<%= coEdit.build %>/public',
+          '<%= coEdit.build %>/public/images',
+          '<%= coEdit.build %>/public/styles'
         ]
       }
     },
 
     imagemin: {
-      dist: {
+      build: {
         files: [{
           expand: true,
           cwd: '<%= coEdit.app %>/images',
           src: '{,*/}*.{png,jpg,jpeg,gif}',
-          dest: '<%= coEdit.dist %>/public/images'
+          dest: '<%= coEdit.build %>/public/images'
         }]
       }
     },
 
     svgmin: {
-      dist: {
+      build: {
         files: [{
           expand: true,
           cwd: '<%= coEdit.app %>/images',
           src: '{,*/}*.svg',
-          dest: '<%= coEdit.dist %>/public/images'
+          dest: '<%= coEdit.build %>/public/images'
         }]
       }
     },
 
     htmlmin: {
-      dist: {
+      build: {
         options: {
           collapseWhitespace: true,
           conservativeCollapse: true,
@@ -221,9 +221,9 @@ module.exports = function (grunt) {
         },
         files: [{
           expand: true,
-          cwd: '<%= coEdit.dist %>/public',
+          cwd: '<%= coEdit.build %>/public',
           src: ['*.html', 'views/{,*/}*.html'],
-          dest: '<%= coEdit.dist %>/public'
+          dest: '<%= coEdit.build %>/public'
         }]
       }
     },
@@ -231,7 +231,7 @@ module.exports = function (grunt) {
     // ng-annotate tries to make the code safe for minification automatically
     // by using the Angular long form for dependency injection.
     ngAnnotate: {
-      dist: {
+      build: {
         files: [{
           expand: true,
           cwd: '.tmp/concat/scripts',
@@ -243,14 +243,14 @@ module.exports = function (grunt) {
 
     // Replace Google CDN references
     cdnify: {
-      dist: {
-        html: ['<%= coEdit.dist %>/public/*.html']
+      build: {
+        html: ['<%= coEdit.build %>/public/*.html']
       }
     },
 
     // Copies remaining files to places other tasks can use
     copy: {
-      dist: {
+      build: {
         files: [{
           expand: true,
           cwd: './server/',
@@ -260,7 +260,7 @@ module.exports = function (grunt) {
           expand: true,
           dot: true,
           cwd: '<%= coEdit.app %>',
-          dest: '<%= coEdit.dist %>/public',
+          dest: '<%= coEdit.build %>/public',
           src: [
             '*.{ico,png,txt}',
             '.htaccess',
@@ -272,13 +272,13 @@ module.exports = function (grunt) {
         }, {
           expand: true,
           cwd: '.tmp/images',
-          dest: '<%= coEdit.dist %>/public/images',
+          dest: '<%= coEdit.build %>/public/images',
           src: ['generated/*']
         }, {
           expand: true,
-          cwd: 'bower_components/bootstrap/dist',
+          cwd: 'bower_components/bootstrap/build',
           src: 'fonts/*',
-          dest: '<%= coEdit.dist %>/public'
+          dest: '<%= coEdit.build %>/public'
         }]
       },
       styles: {
@@ -297,7 +297,7 @@ module.exports = function (grunt) {
       test: [
         'copy:styles'
       ],
-      dist: [
+      build: [
         'copy:styles',
         'imagemin',
         'svgmin'
@@ -315,7 +315,7 @@ module.exports = function (grunt) {
 
 
   grunt.registerTask('dev', 'start dev server', function (target) {
-    if (target === 'dist') {
+    if (target === 'build') {
       return grunt.task.run('express:development');
     }
 
@@ -330,7 +330,7 @@ module.exports = function (grunt) {
     ]);
   });
   grunt.registerTask('serve', 'Compile then start a connect/express web server', function (target) {
-    if (target === 'dist') {
+    if (target === 'build') {
       return grunt.task.run(['build', 'express:prod']);
     }
 
@@ -360,14 +360,14 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('build', [
-    'clean:dist',
+    'clean:build',
     'wiredep',
     'useminPrepare',
-    'concurrent:dist',
+    'concurrent:build',
     'autoprefixer',
     'concat',
     'ngAnnotate',
-    'copy:dist',
+    'copy:build',
     'cdnify',
     'cssmin',
     'uglify',
