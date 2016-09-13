@@ -75,7 +75,6 @@
     "build": "grunt build",
     "serve": "grunt serve",
     "start": "node server/app.js",
-    "postinstall": "echo postinstall time; ./node_modules/grunt-cli/bin/grunt serve",
-    "heroku-postbuild": "echo postinstall time;./node_modules/bower/bin/bower install; ./node_modules/grunt-cli/bin/grunt serve;"
+    "postinstall": "echo postinstall time; ./node_modules/grunt-cli/bin/grunt build"
   }
 }
