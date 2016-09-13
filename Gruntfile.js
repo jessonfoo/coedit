@@ -345,7 +345,7 @@ module.exports = function (grunt) {
       'autoprefixer:server',
       'express',
       // 'open',
-      // 'watch'
+      'watch'
     ]);
   });
 
@@ -385,6 +385,7 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('default', [
+    'build',
     'serve'
   ]);
 };
