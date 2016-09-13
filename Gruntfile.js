@@ -358,7 +358,7 @@ module.exports = function (grunt) {
     'clean:server',
     'wiredep',
     'concurrent:test',
-    'autoprefixer',
+    // 'autoprefixer',
     'connect:test',
     'karma'
   ]);
@@ -368,7 +368,7 @@ module.exports = function (grunt) {
     'wiredep',
     'useminPrepare',
     'concurrent:build',
-    'autoprefixer',
+    // 'autoprefixer',
     'concat',
     'ngAnnotate',
     'copy:build',
@@ -385,7 +385,6 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('default', [
-    'build',
     'serve'
   ]);
 };
