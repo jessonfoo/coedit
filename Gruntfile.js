@@ -344,8 +344,8 @@ module.exports = function (grunt) {
       'concurrent:server',
       'autoprefixer:server',
       'express',
-      'open',
-      'watch'
+      // 'open',
+      // 'watch'
     ]);
   });
 
