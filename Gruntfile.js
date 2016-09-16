@@ -325,8 +325,8 @@ module.exports = function (grunt) {
       'concurrent:server',
       'autoprefixer:server',
       'express',
-      'open',
-      'watch'
+      // 'open',
+      // 'watch'
     ]);
   });
   grunt.registerTask('serve', 'Compile then start a connect/express web server', function (target) {
