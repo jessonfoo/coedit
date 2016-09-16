@@ -254,7 +254,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: './server/',
-          dest: '/server',
+          dest: './build/',
           src: '**/*.*'
         }, {
           expand: true,
@@ -369,7 +369,6 @@ module.exports = function (grunt) {
     'ngAnnotate',
     'copy:dist',
     'cdnify',
-    'cssmin',
     'uglify',
     'filerev',
     'usemin',

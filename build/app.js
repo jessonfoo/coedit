@@ -1,15 +1,13 @@
-'use strict'
-require('dotenv').load();
+#!/usr/bin/env node
 var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
 var app = express();
-
 var routes = require('./routes/index');
 
 // Set static files
-app.use(express.static('../app'));
-app.use(express.static('../.tmp'));
+app.use(express.static('app'));
+app.use(express.static('.tmp'));
 app.use('/bower_components', express.static(path.dirname(__dirname) + '/bower_components'));
 
 app.use(bodyParser.json());
