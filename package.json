@@ -72,6 +72,7 @@
     "npm": "3.10.6"
   },
   "scripts": {
+    "heroku-prebuild": "echo prebuild v0.0.0",
     "build": "grunt build",
     "serve": "grunt serve",
     "start": "node server/app.js",
