@@ -1,1 +1,1 @@
-web: node ./server/app.js
+web: node ./server/app.js  -p $PORT -e $RACK_ENV
