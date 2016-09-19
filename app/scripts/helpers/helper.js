@@ -2,12 +2,12 @@
 function getExampleRef() {
   // Get hash from end of URL or generate a random one.
 
-  // var ref = new Firebase('https://coedit-4b1b9.firebaseio.com');
+  var ref = new Firebase('https://coedit-4b1b9.firebaseio.com');
   var hash = window.location.hash.replace(/#/g, '');
   if (hash) {
     ref = ref.child(hash);
   } else {
-    ref = ref.push('test'); // generate unique location.
+    ref = ref.push('test'); 
     window.location = window.location + '#' + ref.name(); // add it as a hash to the URL.
   }
 

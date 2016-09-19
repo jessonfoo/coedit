@@ -26,7 +26,7 @@ angular.module('coeditApp')
         // push messages to the end of the array
         $scope.messages.$add({
           text: newMessage,
-          user: currentAuth.displayName,
+          user: currentAuth.uid,
           userId: currentAuth.uid
         })
           .catch(alert);

@@ -87,7 +87,6 @@ angular.module('coeditApp')
         controller: 'AccountCtrl',
         resolve: {
           "currentAuth": ["auth", function (auth) {
-            // returns a promisse so the resolve waits for it to complete
             return auth.$requireSignIn();
           }]
         }
